@@ -1,5 +1,7 @@
 This Telegram bot is designed to extract text from images. Follow the steps below to set up and run the bot.
 
+![Example](./docs/example.jpg)
+
 ## Prerequisites
 
 **Telegram Bot Token:** Obtain a Telegram Bot Token from BotFather. Set it as the `BOT_TOKEN` environment variable.
