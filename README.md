@@ -1,5 +1,3 @@
-Image-to-Text Telegram Bot
-
 This Telegram bot is designed to extract text from images. Follow the steps below to set up and run the bot.
 
 ## Prerequisites
