@@ -5,6 +5,7 @@ import aiopytesseract
 from aiogram import Bot, Dispatcher
 from aiogram.filters import CommandStart
 from aiogram.types import Message
+import easyocr
 
 
 TOKEN = getenv("BOT_TOKEN")
@@ -34,8 +35,18 @@ async def message_handler(message: Message):
         await message.answer("Failed to download the photo!")
         return
 
-    image_text = await aiopytesseract.image_to_string(file.read())
-    await message.answer(image_text)
+    file_data = file.read()
+
+    # Tesseract OCR
+    tesseract_result = await aiopytesseract.image_to_string(file_data, lang="eng+rus")
+
+    # EasyOCR
+    easyocr_result = easyocr.Reader(["en", "ru"]).readtext(file_data, detail=0)
+    easyocr_result = "\n".join(easyocr_result)
+
+    result = f"Tesseract OCR:\n{tesseract_result}\n\nEasyOCR:\n{easyocr_result}"
+
+    await message.answer(result)
 
 
 async def main() -> None:
